@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DialogaHair - Sistema Completo para Salões e Barbearias</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <style>
+    /* Cores personalizadas para verde esmeralda */
+    .bg-emerald-gradient {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+
+    .text-emerald-800 {
+      color: #065f46;
+    }
+
+    .border-emerald-500 {
+      border-color: #10b981;
+    }
+
+    .hover\:bg-emerald-700:hover {
+      background-color: #047857;
+    }
+
+    .bg-emerald-50 {
+      background-color: #ecfdf5;
+    }
+
+    .bg-emerald-100 {
+      background-color: #d1fae5;
+    }
+
+    .from-emerald-50 {
+      --tw-gradient-from: #ecfdf5;
+      --tw-gradient-to: rgba(236, 253, 245, 0);
+      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    }
+
+    .to-emerald-100 {
+      --tw-gradient-to: #d1fae5;
+    }
+
+    .bg-emerald-600 {
+      background-color: #059669;
+    }
+
+    .bg-emerald-700 {
+      background-color: #047857;
+    }
+
+    .bg-emerald-800 {
+      background-color: #065f46;
+    }
+
+    .text-emerald-600 {
+      color: #059669;
+    }
+
+    .border-emerald-600 {
+      border-color: #059669;
+    }
+
+    .hover\:bg-emerald-800:hover {
+      background-color: #065f46;
+    }
+
+    .hover\:bg-emerald-900:hover {
+      background-color: #064e3b;
+    }
+
+    .bg-emerald-900 {
+      background-color: #064e3b;
+    }
+
+    .text-emerald-300 {
+      color: #6ee7b7;
+    }
+
+    .border-emerald-800 {
+      border-color: #065f46;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div
+        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+              <div class="flex justify-between items-center">
+                <h3 id="modal-title" class="text-2xl leading-6 font-bold text-emerald-800"></h3>
+                <button id="close-modal" class="text-gray-400 hover:text-gray-500">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <div class="mt-4">
+                <div id="modal-icon" class="text-emerald-600 text-4xl mb-4"></div>
+                <div id="modal-content" class="text-gray-700"></div>
+                <div id="modal-benefits" class="mt-6">
+                  <h4 class="font-semibold text-emerald-700 mb-2">Benefícios:</h4>
+                  <ul id="benefits-list" class="list-disc pl-5 space-y-1"></ul>
+                </div>
+                <div id="modal-image" class="mt-6 hidden">
+                  <img src="" alt="" class="rounded-lg shadow-md w-full">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button type="button" id="modal-action"
+            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-emerald-600 text-base font-medium text-white hover:bg-emerald-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+            Entendi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-emerald-gradient text-white py-6 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+      <div>
+        <h1 class="text-3xl font-bold">DialogaHair</h1>
+        <p class="text-lg opacity-90">Solução completa para seu salão ou barbearia</p>
+      </div>
+      <a href="https://wa.me/5584998342359?text=Ol%C3%A1!%20Tenho%20interesse%20em%20conhecer%20melhor%20a%20aplica%C3%A7%C3%A3o%20para%20sal%C3%A3o%2Fbarbearia.%20Voc%C3%AA%20pode%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F%20Quero%20entender%20como%20ela%20pode%20ajudar%20no%20meu%20neg%C3%B3cio.%20%F0%9F%98%8A"
+        class="bg-white text-emerald-600 px-6 py-2 rounded-full hover:bg-emerald-100 transition flex items-center gap-2 font-medium">
+        <i class="fab fa-whatsapp"></i> Fale conosco
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-emerald-50 to-emerald-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+      <div class="md:w-1/2 text-center md:text-left animate-fade-in">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-emerald-800">Transforme seu salão com tecnologia inteligente
+        </h2>
+        <p class="text-lg mb-6 text-gray-700">Controle completo de agendamentos, vendas, marketing e muito mais em um
+          único sistema.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+          <a href="#planos"
+            class="bg-emerald-600 text-white px-6 py-3 rounded-full hover:bg-emerald-700 transition font-medium shadow-md hover:shadow-lg">Conheça
+            nossos planos</a>
+          <a href="#funcionalidades"
+            class="border-2 border-emerald-600 text-emerald-600 px-6 py-3 rounded-full hover:bg-emerald-50 transition font-medium">Ver
+            funcionalidades</a>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 animate-slide-up">
+        <!-- Composição visual criativa -->
+        <div class="relative w-full h-96">
+          <!-- Círculos decorativos -->
+          <div class="absolute w-64 h-64 bg-emerald-200 rounded-full opacity-30 top-0 right-0 -mt-8 -mr-8"></div>
+          <div class="absolute w-40 h-40 bg-emerald-400 rounded-full opacity-20 bottom-4 left-4"></div>
+
+          <!-- Elemento principal - Interface estilizada -->
+          <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-white rounded-2xl shadow-xl p-4">
+            <div class="grid grid-cols-3 gap-2 h-full">
+              <!-- Células com ícones temáticos -->
+              <div class="bg-emerald-50 rounded-lg flex items-center justify-center">
+                <i class="fas fa-calendar-alt text-emerald-600 text-2xl"></i>
+              </div>
+              <div class="bg-emerald-100 rounded-lg flex items-center justify-center">
+                <i class="fas fa-cut text-emerald-700 text-2xl"></i>
+              </div>
+              <div class="bg-emerald-50 rounded-lg flex items-center justify-center">
+                <i class="fas fa-chart-line text-emerald-600 text-2xl"></i>
+              </div>
+              <div class="bg-emerald-100 rounded-lg flex items-center justify-center">
+                <i class="fas fa-shopping-cart text-emerald-700 text-2xl"></i>
+              </div>
+              <!-- Célula central com logo -->
+              <div class="bg-emerald-600 rounded-lg flex items-center justify-center">
+                <div class="text-white text-center p-2">
+                  <i class="fas fa-chair text-3xl mb-1"></i>
+                  <span class="text-xs font-bold">DIALOGA</span>
+                </div>
+              </div>
+              <div class="bg-emerald-50 rounded-lg flex items-center justify-center">
+                <i class="fas fa-mobile-alt text-emerald-600 text-2xl"></i>
+              </div>
+              <div class="bg-emerald-100 rounded-lg flex items-center justify-center">
+                <i class="fas fa-users text-emerald-700 text-2xl"></i>
+              </div>
+              <div class="bg-emerald-50 rounded-lg flex items-center justify-center">
+                <i class="fas fa-bell text-emerald-600 text-2xl"></i>
+              </div>
+              <div class="bg-emerald-100 rounded-lg flex items-center justify-center">
+                <i class="fas fa-wallet text-emerald-700 text-2xl"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Elementos flutuantes decorativos -->
+          <div
+            class="absolute top-8 left-8 w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg">
+            <i class="fas fa-scissors text-white"></i>
+          </div>
+          <div
+            class="absolute bottom-8 right-8 w-16 h-16 rounded-full bg-emerald-300 flex items-center justify-center shadow-lg">
+            <i class="fas fa-phone-alt text-emerald-800"></i>
+          </div>
+          <div
+            class="absolute top-24 right-24 w-10 h-10 rounded-full bg-emerald-400 flex items-center justify-center shadow-lg">
+            <i class="fas fa-star text-white text-sm"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Todas Funcionalidades -->
+  <section id="funcionalidades" class="py-12 bg-emerald-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12 text-emerald-800">Todas as Funcionalidades</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Lembrete de Horários -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-bell"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Lembrete de Horários</h3>
+              <p class="text-gray-600 text-sm">Envio automático de lembretes por WhatsApp ou SMS.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Lembrete de Horários', 'fas fa-bell', 'Reduza faltas e atrasos com nosso sistema automatizado de lembretes.', ['Redução de até 90% nas faltas', 'Lembretes personalizáveis', 'Envio 24h e 1h antes do horário', 'Confirmação de presença'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Programa de Fidelidade -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-medal"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Programa de Fidelidade</h3>
+              <p class="text-gray-600 text-sm">Crie sistemas de pontos e recompensas para clientes.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Programa de Fidelidade', 'fas fa-medal', 'Fidelize seus clientes com um programa personalizado de recompensas.', ['Pontos por serviços realizados', 'Recompensas personalizáveis', 'Aumento da frequência de clientes', 'Relatórios de desempenho'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Envio de Notícias e Promoções -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-bullhorn"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Envio de Notícias e Promoções</h3>
+              <p class="text-gray-600 text-sm">Comunique-se facilmente com sua base de clientes.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Envio de Notícias e Promoções', 'fas fa-bullhorn', 'Mantenha seus clientes engajados com comunicações estratégicas.', ['Campanhas por segmentação', 'Templates personalizáveis', 'Agendamento de envios', 'Relatório de abertura'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Gestão Financeira -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-calculator"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Gestão Financeira</h3>
+              <p class="text-gray-600 text-sm">Controle completo de receitas, despesas e fluxo de caixa.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Gestão Financeira', 'fas fa-calculator', 'Controle total das finanças do seu negócio em um só lugar.', ['Controle de receitas e despesas', 'Fluxo de caixa diário/semanal/mensal', 'Conciliação bancária', 'Exportação para contabilidade'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Pagamento On-line -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-credit-card"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Pagamento On-line</h3>
+              <p class="text-gray-600 text-sm">Aceite pagamentos digitais de forma segura.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Pagamento On-line', 'fas fa-credit-card', 'Ofereça diversas opções de pagamento para seus clientes.', ['Integração com Mercado Pago/PagSeguro', 'Pagamento por link', 'Parcelamento em até 12x', 'Segurança e antifraude'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Relatórios Gerenciais -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-chart-pie"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Relatórios Gerenciais</h3>
+              <p class="text-gray-600 text-sm">Dados e insights para melhorar seu negócio.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Relatórios Gerenciais', 'fas fa-chart-pie', 'Tome decisões baseadas em dados com nossos relatórios completos.', ['Desempenho por profissional', 'Produtos mais vendidos', 'Clientes mais frequentes', 'Exportação para Excel/PDF'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Pacotes de Serviços e Produtos -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-box-open"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Pacotes de Serviços e Produtos</h3>
+              <p class="text-gray-600 text-sm">Crie combos e ofertas especiais.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Pacotes de Serviços e Produtos', 'fas fa-box-open', 'Aumente seu ticket médio com pacotes e promoções atraentes.', ['Criação de combos personalizados', 'Descontos progressivos', 'Validade controlada', 'Destaque no aplicativo'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Gestão de Estoque -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-boxes"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Gestão de Estoque</h3>
+              <p class="text-gray-600 text-sm">Controle de produtos e avisos de reposição.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Gestão de Estoque', 'fas fa-boxes', 'Nunca mais perca vendas por falta de produtos.', ['Controle de entrada e saída', 'Alertas de reposição', 'Histórico de movimentação', 'Integração com vendas'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Comandas e Controle de Consumo -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-clipboard-list"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Comandas e Controle de Consumo</h3>
+              <p class="text-gray-600 text-sm">Registro completo de serviços realizados.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Comandas e Controle de Consumo', 'fas fa-clipboard-list', 'Controle detalhado de todos os serviços realizados.', ['Comandas digitais', 'Histórico completo do cliente', 'Controle de consumo por produto', 'Fechamento automático'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Aniversariantes -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-birthday-cake"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Aniversariantes</h3>
+              <p class="text-gray-600 text-sm">Alertas e promoções para datas especiais.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Aniversariantes', 'fas fa-birthday-cake', 'Surpreenda seus clientes em seu dia especial.', ['Alertas de aniversários', 'Promoções automáticas', 'Mensagens personalizadas', 'Relatório de aniversariantes'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Lista de Espera -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-clock"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Lista de Espera</h3>
+              <p class="text-gray-600 text-sm">Gerencie clientes que desejam horários cancelados.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Lista de Espera', 'fas fa-clock', 'Aproveite todos os horários disponíveis do seu salão.', ['Notificação automática de vagas', 'Priorização por preferência', 'Histórico de espera', 'Confirmação rápida'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Mensagens de Retorno Automáticas -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-robot"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Mensagens de Retorno Automáticas</h3>
+              <p class="text-gray-600 text-sm">Fluxos de comunicação pré-configurados.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Mensagens de Retorno Automáticas', 'fas fa-robot', 'Automatize sua comunicação e ganhe tempo.', ['Fluxos de mensagens pré-definidos', 'Personalização por segmento', 'Agendamento de campanhas', 'Análise de resultados'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Pesquisa de Satisfação -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-star"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Pesquisa de Satisfação</h3>
+              <p class="text-gray-600 text-sm">Avalie a qualidade dos serviços automaticamente.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Pesquisa de Satisfação', 'fas fa-star', 'Melhore continuamente seus serviços com feedbacks reais.', ['Envio automático após serviço', 'Avaliação por estrelas', 'Comentários dos clientes', 'Relatório de satisfação'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Clube de Clientes -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-users"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Clube de Clientes</h3>
+              <p class="text-gray-600 text-sm">Área exclusiva com benefícios para clientes frequentes.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Clube de Clientes', 'fas fa-users', 'Ofereça uma experiência VIP para seus melhores clientes.', ['Benefícios exclusivos', 'Níveis de participação', 'Eventos fechados', 'Programa de indicação'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Site do Estabelecimento -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-globe"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Site do Estabelecimento</h3>
+              <p class="text-gray-600 text-sm">Página profissional com seus serviços e portfólio.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Site do Estabelecimento', 'fas fa-globe', 'Tenha um site profissional integrado ao seu sistema.', ['Design responsivo', 'Galeria de trabalhos', 'Agendamento online integrado', 'SEO otimizado'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+
+        <!-- Comissões, Vales e Comandas de Consumo de Profissionais -->
+        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+          <div class="flex items-start mb-3">
+            <div class="text-emerald-600 mr-4 text-xl"><i class="fas fa-hand-holding-usd"></i></div>
+            <div>
+              <h3 class="text-lg font-semibold">Comissões, Vales e Comandas de Consumo de Profissionais</h3>
+              <p class="text-gray-600 text-sm">Controle de comissões e benefícios para equipe.</p>
+            </div>
+          </div>
+          <button
+            onclick="showFeatureDetails('Comissões, Vales e Comandas de Consumo de Profissionais', 'fas fa-hand-holding-usd', 'Gerencie facilmente as comissões e benefícios da sua equipe.', ['Cálculo automático de comissões', 'Vales serviços/produtos', 'Relatórios de desempenho', 'Controle de metas'], '')"
+            class="text-emerald-600 text-sm font-medium inline-flex items-center">Ver Detalhes <i
+              class="fas fa-chevron-right ml-1 text-xs"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12 text-emerald-800">O que nossos clientes dizem</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-emerald-50 p-6 rounded-xl shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-400 mr-2">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-4 italic">"O DialogaHair revolucionou meu salão. Agendamentos online reduziram em
+            90% as falhas de comunicação com clientes."</p>
+          <div class="flex items-center">
+            <div
+              class="bg-emerald-200 w-10 h-10 rounded-full flex items-center justify-center text-emerald-800 font-bold mr-3">
+              M</div>
+            <div>
+              <h4 class="font-semibold">Marcela Silva</h4>
+              <p class="text-sm text-gray-600">Salão Bella Hair</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-emerald-50 p-6 rounded-xl shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-400 mr-2">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-4 italic">"A loja virtual integrada aumentou minhas vendas de produtos em 40%. Os
+            clientes adoram a comodidade de comprar pelo site."</p>
+          <div class="flex items-center">
+            <div
+              class="bg-emerald-200 w-10 h-10 rounded-full flex items-center justify-center text-emerald-800 font-bold mr-3">
+              R</div>
+            <div>
+              <h4 class="font-semibold">Ricardo Almeida</h4>
+              <p class="text-sm text-gray-600">Barbearia Classic</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-emerald-50 p-6 rounded-xl shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-400 mr-2">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-4 italic">"O sistema de fidelidade gerou um aumento de 25% na frequência dos meus
+            clientes. Melhor investimento que fiz!"</p>
+          <div class="flex items-center">
+            <div
+              class="bg-emerald-200 w-10 h-10 rounded-full flex items-center justify-center text-emerald-800 font-bold mr-3">
+              C</div>
+            <div>
+              <h4 class="font-semibold">Carla Mendes</h4>
+              <p class="text-sm text-gray-600">Studio Carla Mendes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planos -->
+  <section id="planos" class="py-12 bg-gradient-to-b from-emerald-50 to-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-4 text-emerald-800">Escolha o plano ideal para seu negócio</h2>
+      <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Planos flexíveis que crescem com o seu salão ou
+        barbearia. Teste grátis por 30 dias!</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  <!-- Plano Essencial -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-emerald-100 hover:border-emerald-300 transition transform hover:-translate-y-1">
+    <div class="bg-emerald-600 text-white py-4 px-6">
+      <h3 class="text-xl font-bold">Essencial</h3>
+      <p class="opacity-90">Para 1 profissional</p>
+    </div>
+    <div class="p-6">
+      <div class="text-3xl font-bold mb-2">R$49,90<span class="text-sm font-normal text-gray-500">/mês</span></div>
+      <p class="text-sm text-gray-600">ou R$44,91/mês (R$269,46) no plano semestral</p>
+      <p class="text-sm text-gray-600 mb-6">ou R$39,84/mês (R$478,08) no plano anual</p>
+
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Agendamento online</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>App personalizado</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Lembretes automáticos</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Gestão financeira básica</li>
+      </ul>
+
+      <a href="#" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white text-center py-3 rounded-lg font-medium transition">Experimente grátis</a>
+    </div>
+  </div>
+
+  <!-- Plano Profissional -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-emerald-400 transform hover:-translate-y-1 relative">
+    <div class="absolute top-0 right-0 bg-emerald-400 text-white text-xs font-bold px-3 py-1 transform translate-x-2 -translate-y-2 rotate-6">MAIS POPULAR</div>
+    <div class="bg-emerald-700 text-white py-4 px-6">
+      <h3 class="text-xl font-bold">Profissional</h3>
+      <p class="opacity-90">2 a 5 profissionais</p>
+    </div>
+    <div class="p-6">
+      <div class="text-3xl font-bold mb-2">R$69,90<span class="text-sm font-normal text-gray-500">/mês</span></div>
+      <p class="text-sm text-gray-600">ou R$62,91/mês (R$377,46) no plano semestral</p>
+      <p class="text-sm text-gray-600 mb-6">ou R$55,84/mês (R$670,08) no plano anual</p>
+
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Tudo do Essencial +</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Loja virtual integrada</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Programa de fidelidade</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Relatórios avançados</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Gestão de equipe</li>
+      </ul>
+
+      <a href="#" class="block w-full bg-emerald-700 hover:bg-emerald-800 text-white text-center py-3 rounded-lg font-medium transition">Experimente grátis</a>
+    </div>
+  </div>
+
+  <!-- Plano Premium -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-emerald-100 hover:border-emerald-300 transition transform hover:-translate-y-1">
+    <div class="bg-emerald-600 text-white py-4 px-6">
+      <h3 class="text-xl font-bold">Premium</h3>
+      <p class="opacity-90">6 a 10 profissionais</p>
+    </div>
+    <div class="p-6">
+      <div class="text-3xl font-bold mb-2">R$99,90<span class="text-sm font-normal text-gray-500">/mês</span></div>
+      <p class="text-sm text-gray-600">ou R$89,91/mês (R$539,46) no plano semestral</p>
+      <p class="text-sm text-gray-600 mb-6">ou R$79,84/mês (R$958,08) no plano anual</p>
+
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Tudo do Profissional +</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Marketing automatizado</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Gestão de múltiplas unidades</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Suporte prioritário</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Integração com redes sociais</li>
+      </ul>
+
+      <a href="#" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white text-center py-3 rounded-lg font-medium transition">Experimente grátis</a>
+    </div>
+  </div>
+
+  <!-- Plano Master -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-emerald-100 hover:border-emerald-300 transition transform hover:-translate-y-1">
+    <div class="bg-emerald-800 text-white py-4 px-6">
+      <h3 class="text-xl font-bold">Master</h3>
+      <p class="opacity-90">Acima de 10 profissionais</p>
+    </div>
+    <div class="p-6">
+      <div class="text-3xl font-bold mb-2">R$129,90<span class="text-sm font-normal text-gray-500">/mês</span></div>
+      <p class="text-sm text-gray-600">ou R$116,91/mês (R$701,46) no plano semestral</p>
+      <p class="text-sm text-gray-600 mb-6">ou R$103,84/mês (R$1.246,08) no plano anual</p>
+
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Tudo do Premium +</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Consultoria personalizada</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Treinamentos exclusivos</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>API para integrações</li>
+        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i>Dedicated account manager</li>
+      </ul>
+
+      <a href="#" class="block w-full bg-emerald-800 hover:bg-emerald-900 text-white text-center py-3 rounded-lg font-medium transition">Experimente grátis</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="mt-8 text-center text-sm text-gray-600">
+        <p>Todos os planos incluem 30 dias grátis para teste. Sem cobrança antecipada.</p>
+        <p>Precisa de um plano personalizado? <a href="#" class="text-emerald-600 font-medium">Fale conosco</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12 text-emerald-800">Perguntas frequentes</h2>
+
+      <div class="space-y-4">
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full flex justify-between items-center p-4 bg-emerald-50 hover:bg-emerald-100 transition">
+            <span class="font-medium text-left">Como funciona o período de teste gratuito?</span>
+            <i class="fas fa-chevron-down transition-transform duration-200"></i>
+          </button>
+          <div class="faq-answer px-4 bg-white hidden overflow-hidden">
+            <div class="pb-4">
+              <p>Você tem 30 dias para testar todas as funcionalidades do DialogaHair sem compromisso. Não pedimos
+                cartão de crédito para iniciar o teste. Se decidir continuar após o período, basta escolher seu plano.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full flex justify-between items-center p-4 bg-emerald-50 hover:bg-emerald-100 transition">
+            <span class="font-medium text-left">Posso migrar meus dados de outro sistema?</span>
+            <i class="fas fa-chevron-down transition-transform duration-200"></i>
+          </button>
+          <div class="faq-answer px-4 bg-white hidden overflow-hidden">
+            <div class="pb-4">
+              <p>Sim, nossa equipe pode ajudar na migração de clientes, agendamentos e histórico. Entre em contato para
+                avaliarmos seu caso específico.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full flex justify-between items-center p-4 bg-emerald-50 hover:bg-emerald-100 transition">
+            <span class="font-medium text-left">Como funciona o aplicativo personalizado?</span>
+            <i class="fas fa-chevron-down transition-transform duration-200"></i>
+          </button>
+          <div class="faq-answer px-4 bg-white hidden overflow-hidden">
+            <div class="pb-4">
+              <p>Criamos um aplicativo com sua marca, cores e logotipo, disponível nas lojas de aplicativos (Google Play
+                e App Store). Seus clientes podem baixar e usar para agendar, comprar produtos e interagir com seu
+                negócio.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full flex justify-between items-center p-4 bg-emerald-50 hover:bg-emerald-100 transition">
+            <span class="font-medium text-left">Quais métodos de pagamento estão disponíveis?</span>
+            <i class="fas fa-chevron-down transition-transform duration-200"></i>
+          </button>
+          <div class="faq-answer px-4 bg-white hidden overflow-hidden">
+            <div class="pb-4">
+              <p>Integramos com os principais gateways de pagamento: Mercado Pago, PagSeguro, Pix e cartões de
+                crédito/débito. Você escolhe quais métodos aceitar.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full flex justify-between items-center p-4 bg-emerald-50 hover:bg-emerald-100 transition">
+            <span class="font-medium text-left">Preciso de conhecimento técnico para usar?</span>
+            <i class="fas fa-chevron-down transition-transform duration-200"></i>
+          </button>
+          <div class="faq-answer px-4 bg-white hidden overflow-hidden">
+            <div class="pb-4">
+              <p>Não! O DialogaHair foi projetado para ser intuitivo. Além disso, oferecemos tutoriais em vídeo, suporte
+                por chat e treinamentos online para você e sua equipe.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="py-16 bg-emerald-gradient text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-4">Pronto para transformar seu negócio?</h2>
+      <p class="text-xl mb-8">Comece agora mesmo e experimente o DialogaHair gratuitamente por 30 dias.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://wa.me/5584998342359?text=Ol%C3%A1!%20Tenho%20interesse%20em%20conhecer%20melhor%20a%20aplica%C3%A7%C3%A3o%20para%20sal%C3%A3o%2Fbarbearia.%20Voc%C3%AA%20pode%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F%20Quero%20entender%20como%20ela%20pode%20ajudar%20no%20meu%20neg%C3%B3cio.%20%F0%9F%98%8A"
+          class="bg-white text-emerald-600 px-8 py-4 rounded-full hover:bg-emerald-100 transition font-bold flex items-center justify-center gap-2">
+          <i class="fab fa-whatsapp"></i> Fale conosco
+        </a>
+        <a href="#planos"
+          class="border-2 border-white text-white px-8 py-4 rounded-full hover:bg-emerald-700 transition font-bold">Ver
+          planos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="bg-emerald-900 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-xl font-bold mb-4">DialogaHair</h3>
+        <p class="text-emerald-300">Solução completa para gestão de salões e barbearias.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Produto</h4>
+        <ul class="space-y-2">
+          <li><a href="#funcionalidades" class="text-emerald-300 hover:text-white transition">Funcionalidades</a></li>
+          <li><a href="#planos" class="text-emerald-300 hover:text-white transition">Planos</a></li>
+          <li><a href="#" class="text-emerald-300 hover:text-white transition">Depoimentos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Empresa</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-emerald-300 hover:text-white transition">Sobre nós</a></li>
+          <li><a href="#" class="text-emerald-300 hover:text-white transition">Blog</a></li>
+          <li><a href="#" class="text-emerald-300 hover:text-white transition">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Contato</h4>
+        <ul class="space-y-2">
+          <li class="flex items-center">
+            <i class="fas fa-phone-alt mr-2 text-emerald-300"></i>
+            <span class="text-emerald-300">(84) 99834-2359</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fas fa-envelope mr-2 text-emerald-300"></i>
+            <span class="text-emerald-300">contato@dialogatech.com</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fab fa-whatsapp mr-2 text-emerald-300"></i>
+            <a href="https://wa.me/5584998342359" class="text-emerald-300 hover:text-white transition">WhatsApp</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 pt-8 mt-8 border-t border-emerald-800 text-center text-emerald-300 text-sm">
+      <p>&copy; 2025 DialogaTech. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Animações e interações -->
+  <style>
+    .animate-fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .animate-slide-up {
+      animation: slideUp 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Animation */
+    .faq-question.active i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-answer.open {
+      max-height: 500px;
+    }
+
+    /* Modal styles */
+    #modal {
+      transition: opacity 0.3s ease;
+    }
+  </style>
+
+  <script>
+    // FAQ Toggle 
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        // Toggle a classe 'active' no botão da pergunta
+        question.classList.toggle('active');
+
+        // Seleciona a resposta correspondente
+        const answer = question.nextElementSibling;
+
+        // Alterna entre mostrar e esconder a resposta
+        answer.classList.toggle('open');
+        answer.classList.toggle('hidden');
+
+        // Fecha outras respostas abertas
+        document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+          if (otherAnswer !== answer && otherAnswer.classList.contains('open')) {
+            otherAnswer.classList.remove('open');
+            otherAnswer.classList.add('hidden');
+            otherAnswer.previousElementSibling.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalAction = document.getElementById('modal-action');
+
+    function showFeatureDetails(title, icon, description, benefits, imageUrl) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-icon').innerHTML = `<i class="${icon}"></i>`;
+      document.getElementById('modal-content').textContent = description;
+
+      const benefitsList = document.getElementById('benefits-list');
+      benefitsList.innerHTML = '';
+      benefits.forEach(benefit => {
+        const li = document.createElement('li');
+        li.textContent = benefit;
+        benefitsList.appendChild(li);
+      });
+
+      if (imageUrl) {
+        const modalImage = document.getElementById('modal-image');
+        modalImage.classList.remove('hidden');
+        modalImage.querySelector('img').src = imageUrl;
+        modalImage.querySelector('img').alt = title;
+      } else {
+        document.getElementById('modal-image').classList.add('hidden');
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    modalAction.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+
+</html>

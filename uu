@@ -1,0 +1,13 @@
+📊 Tabela Atualizada com Plano Semestral
+Profissionais	Mensal	Semestral (10% off)	Anual (20% off)
+1 profissional	R$ 49,90/mês	R$ 44,91/mês (R$ 269,46)	R$ 39,84/mês (R$ 478,08)
+
+2 a 5 profissionais	R$ 69,90/mês	R$ 62,91/mês (R$ 377,46)	R$ 55,84/mês (R$ 670,08)
+
+6 a 10 profissionais	R$ 99,90/mês	R$ 89,91/mês (R$ 539,46)	R$ 79,84/mês (R$ 958,08)
+
++ de 10 profissionais	R$ 129,90/mês	R$ 116,91/mês (R$ 701,46)	R$ 103,84/mês (R$ 1.246,08)
+
+💡 Dica de exibição na landing page:
+Apresente os valores arredondados, como por exemplo:
+“A partir de R$ 44,90/mês no plano semestral” – mesmo que o valor exato seja R$ 44,91.

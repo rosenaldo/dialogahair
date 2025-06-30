@@ -1,0 +1,29 @@
+Roxo Principal (mais escuro):
+
+#6B46C1 (purple-600 no Tailwind)
+
+Usado no cabeçalho e em vários botões
+
+Roxo Médio:
+
+#805AD5 (purple-700 no Tailwind)
+
+Usado no plano profissional
+
+Roxo Mais Claro:
+
+#9F7AEA (purple-400 no Tailwind)
+
+Usado em destaques e bordas
+
+Roxo Escuro (para footer):
+
+#553C9A (purple-800 no Tailwind)
+
+#44337A (purple-900 no Tailwind)
+
+Gradientes:
+
+Header: from-purple-600 (#6B46C1) to-purple-800 (#553C9A)
+
+CTA Final: from-purple-600 (#6B46C1) to-purple-800 (#553C9A)
