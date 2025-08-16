@@ -1,0 +1,126 @@
+    /* Cores personalizadas para verde esmeralda */
+    .bg-emerald-gradient {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+
+    .text-emerald-800 {
+      color: #065f46;
+    }
+
+    .border-emerald-500 {
+      border-color: #10b981;
+    }
+
+    .hover\:bg-emerald-700:hover {
+      background-color: #047857;
+    }
+
+    .bg-emerald-50 {
+      background-color: #ecfdf5;
+    }
+
+    .bg-emerald-100 {
+      background-color: #d1fae5;
+    }
+
+    .from-emerald-50 {
+      --tw-gradient-from: #ecfdf5;
+      --tw-gradient-to: rgba(236, 253, 245, 0);
+      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    }
+
+    .to-emerald-100 {
+      --tw-gradient-to: #d1fae5;
+    }
+
+    .bg-emerald-600 {
+      background-color: #059669;
+    }
+
+    .bg-emerald-700 {
+      background-color: #047857;
+    }
+
+    .bg-emerald-800 {
+      background-color: #065f46;
+    }
+
+    .text-emerald-600 {
+      color: #059669;
+    }
+
+    .border-emerald-600 {
+      border-color: #059669;
+    }
+
+    .hover\:bg-emerald-800:hover {
+      background-color: #065f46;
+    }
+
+    .hover\:bg-emerald-900:hover {
+      background-color: #064e3b;
+    }
+
+    .bg-emerald-900 {
+      background-color: #064e3b;
+    }
+
+    .text-emerald-300 {
+      color: #6ee7b7;
+    }
+
+    .border-emerald-800 {
+      border-color: #065f46;
+    }
+
+
+      /* Animações e interações */
+    .animate-fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .animate-slide-up {
+      animation: slideUp 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Animation */
+    .faq-question.active i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-answer.open {
+      max-height: 500px;
+    }
+
+    /* Modal styles */
+    #modal {
+      transition: opacity 0.3s ease;
+    }
